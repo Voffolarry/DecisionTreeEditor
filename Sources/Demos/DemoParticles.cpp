@@ -390,7 +390,7 @@ namespace nkentseu {
         basePoints.push_back({fireProps.fireSource.x + baseWidth/3, fireProps.fireSource.y - baseHeight});
         basePoints.push_back({fireProps.fireSource.x + baseWidth/2, fireProps.fireSource.y});
         
-        Fill(graphics::Color(255, 50, 0, 200));
+        
         NoStroke();
         Polygon(basePoints);
     }
