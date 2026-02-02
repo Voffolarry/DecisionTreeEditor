@@ -7,7 +7,6 @@
 
 **Larry** is a modern, interactive visual editor for creating and managing decision trees. Built with C++ and SDL3, it provides an intuitive drag-and-drop interface with smooth animations, customizable node types, and a polished user experience.
 
-![Larry Screenshot](screenshot.png)
 
 ## ✨ Features
 
@@ -276,7 +275,7 @@ chmod +x larry.sh
 
 ## 🔧 Configuration
 
-### Application Settings (`Resources/app.config`)
+### **Application** Settings (`Resources/app.config`)
 
 ```ini
 windowTitle=Larry - Decision Tree Editor
@@ -286,15 +285,6 @@ fullscreen=false
 resizable=true
 vsync=true
 targetFPS=60
-```
-
-### Demo Settings (`Resources/demos.config`)
-
-```ini
-[decisiontree]
-enabled=true
-name=Decision Tree Editor
-description=Visual editor for creating and managing decision trees
 ```
 
 ## 🛠️ Development
