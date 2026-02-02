@@ -1,3 +1,8 @@
+/**
+ * TabBar.h
+ * Tab bar widget for managing multiple open files
+ */
+
 #pragma once
 
 #include "Widget.h"
@@ -7,9 +12,17 @@
 
 namespace UI {
 
+    /**
+     * @class TabBar
+     * @brief Tab bar with drag-to-reorder and add functionality
+     * 
+     * Displays horizontal tabs that can be clicked to switch between,
+     * dragged to reorder, and added with the "+" button.
+     */
     class TabBar : public Widget {
     public:
         TabBar(float x, float y, float w, float h) : Widget(x, y, w, h), m_ActiveTab(0), m_IsDragging(false), m_DragIndex(-1) {
+            // Initialize with default tabs
             m_Tabs.push_back("DecisionTree.json");
             m_Tabs.push_back("Settings.json"); 
         }
@@ -20,21 +33,20 @@ namespace UI {
             float tabW = 150.0f;
             bool handled = false;
 
-            // Add Tab Button (at end of tabs)
+            // Handle "Add Tab" button click
             float addBtnX = X + m_Tabs.size() * tabW + 5;
             if (my >= Y && my <= Y + H && mx >= addBtnX && mx <= addBtnX + 20) {
                  if (Core::Input::IsMouseButtonPressed(1)) {
                      m_Tabs.push_back("New Tab");
                      m_ActiveTab = m_Tabs.size() - 1;
-                     return true; // Clicked Add
+                     return true; // Consumed input
                  }
             }
 
-            // Tab Dragging Logic
+            // Continue dragging if mouse is held down
             if (m_IsDragging) {
                 if (Core::Input::IsMouseButtonDown(1)) {
-                    // Update drag pos (visual only for now? or swap?)
-                    // Simple swap: if dragged over another tab, swap them
+                    // Swap tabs if dragged over a different tab
                     int hoverIndex = (int)((mx - X) / tabW);
                     if (hoverIndex >= 0 && hoverIndex < m_Tabs.size() && hoverIndex != m_DragIndex) {
                         std::iter_swap(m_Tabs.begin() + m_DragIndex, m_Tabs.begin() + hoverIndex);

@@ -1,3 +1,8 @@
+/**
+ * MenuBar.h
+ * Top menu bar UI component
+ */
+
 #pragma once
 
 #include "Widget.h"
@@ -6,10 +11,17 @@
 
 namespace UI {
 
+    /**
+     * @class MenuBar
+     * @brief Horizontal menu bar displaying menu items
+     * 
+     * Shows menu labels (File, Edit, View, Help) at the top of the window.
+     * Currently displays static labels without dropdown functionality.
+     */
     class MenuBar : public Widget {
     public:
         MenuBar(float x, float y, float w, float h) : Widget(x, y, w, h) {
-            // Default Menus
+            // Initialize default menus
             m_Menus.push_back("File");
             m_Menus.push_back("Edit");
             m_Menus.push_back("View");

@@ -1,3 +1,8 @@
+/**
+ * TextInput.h
+ * Editable text input field widget
+ */
+
 #pragma once
 
 #include "Widget.h"
@@ -7,6 +12,13 @@
 
 namespace UI {
 
+    /**
+     * @class TextInput
+     * @brief Single-line text input widget with focus and cursor
+     * 
+     * Provides a clickable text field that accepts keyboard input when focused.
+     * Handles text input events and displays a blinking cursor.
+     */
     class TextInput : public Widget {
     public:
         TextInput(float x, float y, float w, float h, std::string* targetString, SDL_Window* window) 

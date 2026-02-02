@@ -1,9 +1,21 @@
+/**
+ * SimpleFont.h
+ * 8x8 bitmap font data for ASCII characters 32-127
+ * 
+ * Contains a simple monospace bitmap font where each character is
+ * represented by 8 bytes (one per row, top to bottom).
+ */
+
 #pragma once
 #include <cstdint>
 
 namespace Graphics {
-    // Simple 8x8 font for ASCII 32-127
-    // Format: 8 bytes per character, row by row (top to bottom)
+    /**
+     * @brief 8x8 bitmap font for ASCII characters 32-127
+     * 
+     * Each character is 8 bytes where each byte represents one row of pixels.
+     * Bit 7 = left pixel, bit 0 = right pixel.
+     */
     static const uint8_t font8x8_basic[96][8] = {
         { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }, // Space
         { 0x18, 0x3C, 0x3C, 0x18, 0x18, 0x00, 0x18, 0x00 }, // !

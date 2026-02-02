@@ -1,3 +1,8 @@
+/**
+ * Button.h
+ * Clickable button UI widget
+ */
+
 #pragma once
 
 #include "Widget.h"
@@ -5,8 +10,23 @@
 
 namespace UI {
 
+    /**
+     * @class Button
+     * @brief A clickable button with hover effects
+     * 
+     * Displays a labeled rectangle that can be clicked to trigger a callback.
+     */
     class Button : public Widget {
     public:
+        /**
+         * @brief Construct a button
+         * @param x X position
+         * @param y Y position
+         * @param w Width
+         * @param h Height
+         * @param label Button text label
+         * @param onClick Callback function to invoke when clicked
+         */
         Button(float x, float y, float w, float h, const std::string& label, std::function<void()> onClick) 
             : Widget(x, y, w, h), Label(label), OnClick(onClick), IsHovered(false) {}
 
@@ -14,13 +34,15 @@ namespace UI {
             float mx = Core::Input::GetMouseX();
             float my = Core::Input::GetMouseY();
 
+            // Check if mouse is over button
             IsHovered = (mx >= X && mx <= X + W && my >= Y && my <= Y + H);
 
+            // Handle click
             if (IsHovered && Core::Input::IsMouseButtonPressed(1)) {
                 if (OnClick) OnClick();
-                return true; // Clicked
+                return true; // Consumed input
             }
-            return IsHovered; // Consumed if hovered? Maybe. For now yes to block selection below.
+            return IsHovered; // Consume hover to block editor interaction
         }
 
         void Draw(Graphics::Renderer& renderer) override {

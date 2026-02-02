@@ -1,3 +1,8 @@
+/**
+ * Label.h
+ * Simple text label UI widget
+ */
+
 #pragma once
 
 #include "Widget.h"
@@ -5,6 +10,12 @@
 
 namespace UI {
 
+    /**
+     * @class Label
+     * @brief Non-interactive text label
+     * 
+     * Displays static text at a specified position.
+     */
     class Label : public Widget {
     public:
         Label(float x, float y, const std::string& text) 

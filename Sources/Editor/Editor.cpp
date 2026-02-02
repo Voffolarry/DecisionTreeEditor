@@ -1,3 +1,8 @@
+/**
+ * Editor.cpp
+ * Implementation of the Editor class
+ */
+
 #include "Editor.h"
 #include "../Core/Input.h"
 #include <iostream>
@@ -6,7 +11,7 @@
 namespace Editor {
 
     Editor::Editor() : m_Root(nullptr), m_SelectedNode(nullptr), m_HoveredNode(nullptr), m_IsDragging(false), m_DragOffsetX(0), m_DragOffsetY(0) {
-        // Initial Tree
+        // Create initial demo decision tree
         m_Root = new Data::TreeNode("Start", Data::NodeType::Start);
         Data::TreeNode* child1 = new Data::TreeNode("Is Ready?", Data::NodeType::Condition);
         Data::TreeNode* child2 = new Data::TreeNode("Do It", Data::NodeType::Action);
@@ -17,7 +22,7 @@ namespace Editor {
         Data::TreeNode* child3 = new Data::TreeNode("Wait", Data::NodeType::Action);
         child1->AddChild(child3, "No");
 
-        // Initial Layout
+        // Calculate initial tree layout positions
         LayoutTree(m_Root, 600, 100, 300, 150);
     }
 
@@ -29,18 +34,17 @@ namespace Editor {
         float mouseX = Core::Input::GetMouseX();
         float mouseY = Core::Input::GetMouseY();
 
-        // Hit Test
+        // Determine which node (if any) is under the mouse cursor
         m_HoveredNode = HitTest(m_Root, mouseX, mouseY);
         
-        // Update Target Scales
+        // Update animation target scales based on hover state
         UpdateNodeScales(m_Root, m_HoveredNode);
 
-        if (inputCaptured) return; // UI stole input
+        if (inputCaptured) return; // UI has captured input, skip editor interactions
 
-        // Selection / Drag Start
-        if (Core::Input::IsMouseButtonPressed(1)) { // Left Click
-            // Only select if we clicked a node, otherwise deselect (optional)
-            // For now:
+        // Handle node selection and drag initiation
+        if (Core::Input::IsMouseButtonPressed(1)) { // Left mouse button
+            // Select the hovered node (or deselect if clicking empty space)
             m_SelectedNode = m_HoveredNode;
             
             if (m_SelectedNode) {
@@ -71,7 +75,7 @@ namespace Editor {
             }
         }
 
-        // Add Child (Right Click) - Simplified context menu substitute
+        // Create child node on right-click (simplified context menu)
         if (Core::Input::IsMouseButtonPressed(3)) { // Right Click
             if (m_HoveredNode) {
                 // Determine connection label based on parent type

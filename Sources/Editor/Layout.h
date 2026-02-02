@@ -1,15 +1,25 @@
+/**
+ * Layout.h
+ * Main layout manager coordinating UI and editor
+ */
+
 #pragma once
 
 #include "../UI/Panel.h"
 #include "../UI/Button.h"
 #include "Editor.h"
 
-
-
 namespace UI { class TextInput; }
 
 namespace Editor {
 
+    /**
+     * @class Layout
+     * @brief Manages the overall UI layout and editor composition
+     * 
+     * Coordinates all UI panels (menu bar, tab bar, side panels, buttons)
+     * with the editor viewport. Handles input routing and rendering order.
+     */
     class Layout {
     public:
         Layout(Editor* editor, float screenW, float screenH, SDL_Window* window);

@@ -1,9 +1,20 @@
+/**
+ * Panel.h
+ * Container panel widget for grouping UI elements
+ */
+
 #pragma once
 
 #include "Widget.h"
 
 namespace UI {
 
+    /**
+     * @class Panel
+     * @brief Container widget that can hold child widgets
+     * 
+     * Provides a colored background panel that manages and renders child widgets.
+     */
     class Panel : public Widget {
     public:
         Panel(float x, float y, float w, float h, uint8_t r, uint8_t g, uint8_t b) 

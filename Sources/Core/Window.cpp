@@ -1,3 +1,8 @@
+/**
+ * Window.cpp
+ * Implementation of the Window wrapper class
+ */
+
 #include "Window.h"
 
 namespace Core {
@@ -7,6 +12,7 @@ namespace Core {
     }
 
     Window::~Window() {
+        // Clean up SDL resources in reverse order of creation
         if (m_Renderer) {
             SDL_DestroyRenderer(m_Renderer);
         }
@@ -17,17 +23,21 @@ namespace Core {
     }
 
     bool Window::Initialize() {
+        // Initialize SDL video subsystem
         if (!SDL_Init(SDL_INIT_VIDEO)) {
             std::cerr << "SDL could not initialize! SDL_Error: " << SDL_GetError() << std::endl;
             return false;
         }
 
+        // Create the window
         m_Window = SDL_CreateWindow(m_Title.c_str(), m_Width, m_Height, 0);
         if (!m_Window) {
             std::cerr << "Window could not be created! SDL_Error: " << SDL_GetError() << std::endl;
             return false;
         }
 
+        // Create the renderer for this window
+        // NULL driver means SDL will choose the best available renderer
         m_Renderer = SDL_CreateRenderer(m_Window, NULL);
         if (!m_Renderer) {
             std::cerr << "Renderer could not be created! SDL_Error: " << SDL_GetError() << std::endl;
